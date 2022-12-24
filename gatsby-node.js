@@ -15,8 +15,11 @@ exports.createPages = async gatsbyUtilities => {
   // Query our posts from the GraphQL server
   const posts = await getPosts(gatsbyUtilities)
 
-  // If there are no posts in WordPress, don't do anything
-  if (!posts.length) {
+  //Query pages from GraphQL
+  const pages = await getPages(gatsbyUtilities);
+
+  // If there are no posts or pages in WordPress, don't do anything
+  if (!posts.length && !pages.length) {
     return
   }
 
@@ -132,20 +135,15 @@ async function createBlogPostArchive({ posts, gatsbyUtilities }) {
 async function getPosts({ graphql, reporter }) {
   const graphqlResult = await graphql(/* GraphQL */ `
     query WpPosts {
-      # Query all WordPress blog posts sorted by date
-      allWpPost(sort: { fields: [date], order: DESC }) {
+      allWpPost(sort: {date: DESC}) {
         edges {
           previous {
             id
           }
-
-          # note: this is a GraphQL alias. It renames "node" to "post" for this query
-          # We're doing this because this "node" is a post! It makes our code more readable further down the line.
           post: node {
             id
             uri
           }
-
           next {
             id
           }
@@ -163,4 +161,36 @@ async function getPosts({ graphql, reporter }) {
   }
 
   return graphqlResult.data.allWpPost.edges
+}
+
+async function getPages({ graphql, reporter }) {
+  const graphqlResult = await graphql(/* GraphQL */ `
+    query WpPosts {
+      # Query all WordPress blog posts sorted by date
+      allWpPage {
+        edges {
+          node {
+            id
+            slug
+            status
+            template {
+              templateName
+            } 
+            title
+            content
+          }
+        }
+      }
+    }
+  `)
+
+  if (graphqlResult.errors) {
+    reporter.panicOnBuild(
+      `There was an error loading your blog posts`,
+      graphqlResult.errors
+    )
+    return
+  }
+
+  return graphqlResult.data.allWpPage.edges
 }
