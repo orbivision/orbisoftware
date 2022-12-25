@@ -12,6 +12,15 @@ const chunk = require(`lodash/chunk`)
  * See https://www.gatsbyjs.com/docs/node-apis/#createPages for more info.
  */
 exports.createPages = async gatsbyUtilities => {
+  
+  // Always redirect root to "home" page from WordPress
+  /*gatsbyUtilities.actions.createRedirect({
+    fromPath: '/',
+    toPath: '/home',
+    redirectInBrowser: true,
+    isPermanent: true
+  });*/
+
   // Query our posts from the GraphQL server
   const posts = await getPosts(gatsbyUtilities)
 
@@ -90,9 +99,9 @@ async function createBlogPostArchive({ posts, gatsbyUtilities }) {
 
       const getPagePath = page => {
         if (page > 0 && page <= totalPages) {
-          // Since our homepage is our blog page
-          // we want the first page to be "/" and any additional pages
-          // to be numbered.
+          // Since our blog pages are under the /blog path,
+          // we want the archive page to be "/blog" and any
+          // additional pages to be numbered.
           // "/blog/2" for example
           return page === 1 ? `/blog` : `/blog/${page}`
         }
@@ -177,7 +186,7 @@ const createIndividualPages = async ({ pages, gatsbyUtilities }) =>
       gatsbyUtilities.actions.createPage({
         // Use the WordPress uri as the Gatsby page path
         // This is a good idea so that internal links and menus work 👍
-        path: page.uri,
+        path: page.uri === '/home/' ? `/` : page.uri,
 
         // use the blog post template as the page component
         component: path.resolve(`./src/templates/page.js`),
