@@ -44,7 +44,7 @@ const BlogIndex = ({
               >
                 <header>
                   <h2>
-                    <Link to={post.uri} itemProp="url">
+                    <Link to={'/blog' + post.uri} itemProp="url">
                       <span itemProp="headline">{parse(title)}</span>
                     </Link>
                   </h2>
@@ -59,11 +59,11 @@ const BlogIndex = ({
 
       {previousPagePath && (
         <>
-          <Link to={previousPagePath}>Previous page</Link>
+          <Link to={'/blog' + previousPagePath}>Previous page</Link>
           <br />
         </>
       )}
-      {nextPagePath && <Link to={nextPagePath}>Next page</Link>}
+      {nextPagePath && <Link to={'/blog' + nextPagePath}>Next page</Link>}
     </Layout>
   )
 }

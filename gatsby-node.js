@@ -28,6 +28,9 @@ exports.createPages = async gatsbyUtilities => {
 
   // And a paginated archive
   await createBlogPostArchive({ posts, gatsbyUtilities })
+
+  // If there are WP pages, create Gatsby pages for them
+  await createIndividualPages({ pages, gatsbyUtilities });
 }
 
 /**
@@ -41,7 +44,7 @@ const createIndividualBlogPostPages = async ({ posts, gatsbyUtilities }) =>
       gatsbyUtilities.actions.createPage({
         // Use the WordPress uri as the Gatsby page path
         // This is a good idea so that internal links and menus work 👍
-        path: post.uri,
+        path: `/blog${post.uri}`,
 
         // use the blog post template as the page component
         component: path.resolve(`./src/templates/blog-post.js`),
@@ -91,7 +94,7 @@ async function createBlogPostArchive({ posts, gatsbyUtilities }) {
           // we want the first page to be "/" and any additional pages
           // to be numbered.
           // "/blog/2" for example
-          return page === 1 ? `/` : `/blog/${page}`
+          return page === 1 ? `/blog` : `/blog/${page}`
         }
 
         return null
@@ -163,21 +166,50 @@ async function getPosts({ graphql, reporter }) {
   return graphqlResult.data.allWpPost.edges
 }
 
+/**
+ * This function creates all the individual pages in this site
+ */
+const createIndividualPages = async ({ pages, gatsbyUtilities }) =>
+  Promise.all(
+    pages.map(({ page }) =>
+      // createPage is an action passed to createPages
+      // See https://www.gatsbyjs.com/docs/actions#createPage for more info
+      gatsbyUtilities.actions.createPage({
+        // Use the WordPress uri as the Gatsby page path
+        // This is a good idea so that internal links and menus work 👍
+        path: page.uri,
+
+        // use the blog post template as the page component
+        component: path.resolve(`./src/templates/page.js`),
+
+        // `context` is available in the template as a prop and
+        // as a variable in GraphQL.
+        context: {
+          // we need to add the post id here
+          // so our blog post template knows which blog post
+          // the current page is (when you open it in a browser)
+          id: page.id,
+          title: page.title
+        },
+      })
+    )
+  )
+
+/**
+ * This function queries GraphQL to retrieve all of 
+ * the WordPress pages.
+ * 
+ */
 async function getPages({ graphql, reporter }) {
   const graphqlResult = await graphql(/* GraphQL */ `
-    query WpPosts {
+    query WpPages {
       # Query all WordPress blog posts sorted by date
       allWpPage {
         edges {
-          node {
+          page: node {
             id
-            slug
-            status
-            template {
-              templateName
-            } 
+            uri
             title
-            content
           }
         }
       }
@@ -186,7 +218,7 @@ async function getPages({ graphql, reporter }) {
 
   if (graphqlResult.errors) {
     reporter.panicOnBuild(
-      `There was an error loading your blog posts`,
+      `There was an error loading your pages`,
       graphqlResult.errors
     )
     return
