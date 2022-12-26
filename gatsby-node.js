@@ -212,7 +212,7 @@ const createIndividualPages = async ({ pages, gatsbyUtilities }) =>
 async function getPages({ graphql, reporter }) {
   const graphqlResult = await graphql(/* GraphQL */ `
     query WpPages {
-      # Query all WordPress blog posts sorted by date
+      # Query all WordPress pages
       allWpPage {
         edges {
           page: node {
