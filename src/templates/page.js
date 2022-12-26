@@ -2,15 +2,15 @@ import React from "react";
 import Layout from "../components/layout";
 import { graphql } from "gatsby";
 
-const Page = ({ data: { page }}) => {
-  console.log(page);
-  return(
-    <Layout>
-      <h1 dangerouslySetInnerHTML={{__html: page.title}} />
-      <div dangerouslySetInnerHTML={{__html: page.content}} />
-    </Layout>
-  )
-  };
+import Seo from "../components/seo";
+
+const Page = ({ data: { page }}) => (
+  <Layout>
+    <Seo title={page.title} />
+    <h1 dangerouslySetInnerHTML={{__html: page.title}} />
+    <div dangerouslySetInnerHTML={{__html: page.content}} />
+  </Layout>
+);
 
 export default Page;
 

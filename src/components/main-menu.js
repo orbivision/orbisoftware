@@ -1,33 +1,37 @@
 import React from "react";
-import { graphql, StaticQuery, Link } from "gatsby";
+import { graphql, useStaticQuery, Link } from "gatsby";
 
-const MainMenu = () => (
-  <StaticQuery query={graphql`
-    query WpMenu {
-      wpMenu(name: {eq: "Main Menu"}) {
-        id
-        name
-        menuItems {
-          nodes {
-            id
-            label
-            title
-            path
-            parentId
-            uri
+const MainMenu = () => {
+  const { wpMenu } = useStaticQuery(
+    graphql`
+      query WpMenu {
+        wpMenu(name: {eq: "Main Menu"}) {
+          id
+          name
+          menuItems {
+            nodes {
+              id
+              label
+              title
+              path
+              parentId
+              uri
+            }
           }
         }
       }
-    }
-  `} render={props => (
+    `
+  )
+
+  return (
     <div>
-      {props.wpMenu.menuItems.nodes.map(item => (
+      {wpMenu.menuItems.nodes.map(item => (
         <Link to={item.uri} key={item.label}>
           {item.label}
         </Link>
       ))}
     </div>
-  )} />
-)
+  )
+}
 
 export default MainMenu;
