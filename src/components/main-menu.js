@@ -53,23 +53,44 @@ const MainMenu = ({ title }) => {
             {allWpMenuItem.nodes.map(item => (
               item.path !== "/home/" && (
                 item.childItems.nodes.length === 0 ? (
-                  <li className="nav-item">
-                    <Link className="nav-link link text-white display-4" to={item.uri}>
-                      {item.label}
-                    </Link>
+                  <li key={item.id} className="nav-item">
+                    {item.uri.includes('http') ? (
+                      <a className="nav-link link text-white display-4"
+                        href={item.uri}
+                        target="_blank"
+                        rel="noreferrer">
+                        {item.label}
+                      </a>
+                    ) : (
+                      <Link to={item.uri} className="nav-link link text-white display-4">
+                        {item.label}
+                      </Link>
+                    )}
                   </li>
                 ) : (
-                  <li className="nav-item dropdown">
+                  <li key={item.id} className="nav-item dropdown">
                     <a className="nav-link link text-white dropdown-toggle display-4"
                       href={item.uri} data-toggle="dropdown-submenu"
                       aria-expanded="false">
                       {item.label}</a>
                     <div className="dropdown-menu">
+                      <ul className="navbar-nav nav-dropdown nav-right">
                       {item.childItems.nodes.map(childItem => (
-                        <a
-                          className="text-white dropdown-item display-4"
-                          href={childItem.uri}>{childItem.label}<br/></a>
+                        <li key={item.id}>
+                          {childItem.uri.includes('http') ? (
+                            <a
+                              className="text-white dropdown-item display-4"
+                              target="_blank"
+                              rel="noreferrer"
+                              href={childItem.uri}>{childItem.label}<br/></a>
+                            ) : (
+                              <Link to={childItem.uri} className="text-white dropdown-item display-4">
+                                {childItem.label}
+                              </Link>
+                            )}
+                        </li>
                       ))}
+                      </ul>
                     </div>
                   </li>    
                 )                
