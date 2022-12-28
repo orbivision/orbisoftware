@@ -7,6 +7,7 @@ import MainMenu from "./main-menu";
 const Header = ({ title, isHomePage }) => {
 
   return (
+    
     <>
       <header className="global-header">
         {isHomePage ? (
@@ -19,7 +20,7 @@ const Header = ({ title, isHomePage }) => {
           </Link>
         )}
       </header>
-      <MainMenu />
+      <MainMenu title={title} />
     </>
   )
 }
