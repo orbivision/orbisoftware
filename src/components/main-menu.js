@@ -5,7 +5,9 @@ const MainMenu = ({ title }) => {
   const { allWpMenuItem } = useStaticQuery(
     graphql`
       query WpMenu {
-        allWpMenuItem(filter: {locations: {eq: GATSBY_HEADER_MENU}, parentDatabaseId: {eq: 0}}) {
+        allWpMenuItem(
+          filter: {locations: {eq: GATSBY_HEADER_MENU}, parentDatabaseId: {eq: 0}}
+          ,sort: {order: ASC}) {
           nodes {
             id
             label
@@ -13,11 +15,13 @@ const MainMenu = ({ title }) => {
             locations
             path
             uri
+            order
             childItems {
               nodes {
                 id
                 label
                 uri
+                order
               }
             }
           }
@@ -44,7 +48,7 @@ const MainMenu = ({ title }) => {
         <div className="menu-logo">
           <div className="navbar-brand">
             <span className="navbar-caption-wrap"><a className="navbar-caption text-white display-5"
-              href="./">
+              href="/">
               &nbsp;&nbsp;{title}</a></span>
           </div>
         </div>
