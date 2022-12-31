@@ -1,3 +1,5 @@
+const jQuery = require("jquery");
+
 jQuery(function($){
 
   var DATA_KEY = 'bs.navbar-dropdown';
@@ -92,7 +94,7 @@ jQuery(function($){
 
           $(event.target).closest(Selector.BASE).each(function(){
 
-              if (event.type == 'show') {
+              if (event.type === 'show') {
 
                   $(Selector.BODY).addClass(ClassName.DROPDOWN_OPEN);
 
