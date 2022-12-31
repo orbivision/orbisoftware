@@ -1,27 +1,29 @@
 import React from "react";
-import { Link } from "gatsby";
-import parse from "html-react-parser";
 
 import MainMenu from "./main-menu";
+import Logo from "./logo";
 
 const Header = ({ title, isHomePage }) => {
 
   return (
     
-    <>
-      <header className="global-header">
-        {isHomePage ? (
-          <h1 className="main-heading">
-            <Link to="/">{parse(title)}</Link>
-          </h1>
-        ) : (
-          <Link className="header-link-home" to="/">
-            {title}
-          </Link>
-        )}
-      </header>
-      <MainMenu title={title} />
-    </>
+    <section className="menu soames-menu" id="menu1">
+      <nav
+        className="navbar navbar-expand beta-menu navbar-dropdown align-items-center navbar-fixed-top navbar-toggleable-sm">
+        <button className="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+          data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+          aria-label="Toggle navigation">
+          <div className="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        </button>
+        <Logo title={title} />
+        <MainMenu />
+      </nav>
+    </section>
   )
 }
 

@@ -42,7 +42,7 @@ const Layout = ({ isHomePage, children }) => {
 
       <main>
         <Header title={title} isHomePage={isHomePage} />
-        {children}
+          {children}
         <Footer />
       </main>
 
