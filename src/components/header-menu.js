@@ -1,10 +1,10 @@
 import React from "react";
 import { graphql, useStaticQuery, Link } from "gatsby";
 
-const MainMenu = () => {
+const HeaderMenu = () => {
   const { allWpMenuItem } = useStaticQuery(
     graphql`
-      query WpMenu {
+      query WpHeaderMenu {
         allWpMenuItem(
           filter: {locations: {eq: GATSBY_HEADER_MENU}, parentDatabaseId: {eq: 0}}
           ,sort: {order: ASC}) {
@@ -86,4 +86,4 @@ const MainMenu = () => {
   )
 }
 
-export default MainMenu;
+export default HeaderMenu;

@@ -43,7 +43,7 @@ const Layout = ({ isHomePage, children }) => {
       <main>
         <Header title={title} isHomePage={isHomePage} />
           {children}
-        <Footer />
+        <Footer title={title} />
       </main>
 
     </div>

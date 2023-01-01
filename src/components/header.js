@@ -1,6 +1,6 @@
 import React from "react";
 
-import MainMenu from "./main-menu";
+import HeaderMenu from "./header-menu";
 import Logo from "./logo";
 
 const Header = ({ title, isHomePage }) => {
@@ -21,7 +21,7 @@ const Header = ({ title, isHomePage }) => {
           </div>
         </button>
         <Logo title={title} />
-        <MainMenu />
+        <HeaderMenu />
       </nav>
     </section>
   )
