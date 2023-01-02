@@ -15,6 +15,7 @@ import "bootstrap/dist/js/bootstrap.min.js";
 import "./src/css/soames/soames-navbar.css";
 import "./src/css/soames/soames-theme.css";
 import "./src/css/soames/soames-gallery.css";
+import "./src/css/soames/soames-parallax.css";
 import "./src/css/soames/soames.css";
 
 // soames - custom JS

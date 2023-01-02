@@ -5,6 +5,7 @@ import parse from "html-react-parser"
 import Bio from "../components/bio"
 import Layout from "../components/layout"
 import Seo from "../components/seo"
+import HeroHeader from "../components/hero-header";
 
 const BlogIndex = ({
   data,
@@ -14,8 +15,9 @@ const BlogIndex = ({
 
   if (!posts.length) {
     return (
-      <Layout isHomePage>
+      <Layout>
         <Seo title="All posts" />
+        <HeroHeader title="Blog" subhead="" />
         <Bio />
         <p>
           No blog posts found. Add posts to your WordPress site and they'll
@@ -28,7 +30,7 @@ const BlogIndex = ({
   return (
     <Layout isHomePage>
       <Seo title="All posts" />
-
+      <HeroHeader title="Blog" subhead="" />
       <Bio />
 
       <ol style={{ listStyle: `none` }}>
