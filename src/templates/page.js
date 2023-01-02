@@ -17,12 +17,17 @@ import "../css/@wordpress/block-library/build-style/theme.css"
 const Page = ({ data: { page }}) => (
   <Layout>
     <Seo title={page.title} />
-    <HeroHeader title={parse(page.title)} subhead={page.excerpt ? parse(page.excerpt): ''} />
+    <HeroHeader
+      title={parse(page.title)}
+      subhead={page.excerpt ? parse(page.excerpt): ''}
+      backgroundImage={page.featuredImage ? page.featuredImage.node.guid : null}
+      backgroundImageTitle={page.featuredImage ? page.featuredImage.node.title : null}
+    />
     {!!page.content && (
-      <section style={{ backgroundColor: '#fff', backgroundImage: 'none'}}>
-        <div class="gatsby-container">
-          {parse(page.content)}
-        </div>
+      <section
+        id="gatsby-containter"
+        style={{ backgroundColor: '#fff', backgroundImage: 'none', padding: '20px'}}>
+        {parse(page.content)}  
       </section>
     )}
   </Layout>
@@ -42,16 +47,8 @@ export const pageQuery = graphql`
       date(formatString: "MMMM DD, YYYY")
       featuredImage {
         node {
-          altText
-          localFile {
-            childImageSharp {
-              gatsbyImageData(
-                quality: 100
-                placeholder: TRACED_SVG
-                layout: FULL_WIDTH
-              )
-            }
-          }
+          title
+          guid
         }
       }
     }

@@ -30,42 +30,48 @@ const BlogIndex = ({
   return (
     <Layout isHomePage>
       <Seo title="All posts" />
-      <HeroHeader title="Blog" subhead="" />
-      <Bio />
+      <HeroHeader title="Tech Blog" subhead="" />
 
-      <ol style={{ listStyle: `none` }}>
-        {posts.map(post => {
-          const title = post.title
+      <section
+        id="gatsby-containter"
+        style={{ backgroundColor: '#fff', backgroundImage: 'none', padding: '20px'}}>
 
-          return (
-            <li key={post.uri}>
-              <article
-                className="post-list-item"
-                itemScope
-                itemType="http://schema.org/Article"
-              >
-                <header>
-                  <h2>
-                    <Link to={'/blog' + post.uri} itemProp="url">
-                      <span itemProp="headline">{parse(title)}</span>
-                    </Link>
-                  </h2>
-                  <small>{post.date}</small>
-                </header>
-                <section itemProp="description">{parse(post.excerpt)}</section>
-              </article>
-            </li>
-          )
-        })}
-      </ol>
+        <Bio />
+        
+        <ol style={{ listStyle: `none` }}>
+          {posts.map(post => {
+            const title = post.title
 
-      {previousPagePath && (
-        <>
-          <Link to={'/blog' + previousPagePath}>Previous page</Link>
-          <br />
-        </>
-      )}
-      {nextPagePath && <Link to={'/blog' + nextPagePath}>Next page</Link>}
+            return (
+              <li key={post.uri}>
+                <article
+                  className="post-list-item"
+                  itemScope
+                  itemType="http://schema.org/Article"
+                >
+                  <header>
+                    <h2>
+                      <Link to={'/blog' + post.uri} itemProp="url">
+                        <span itemProp="headline">{parse(title)}</span>
+                      </Link>
+                    </h2>
+                    <small>{post.date}</small>
+                  </header>
+                  <section itemProp="description">{parse(post.excerpt)}</section>
+                </article>
+              </li>
+            )
+          })}
+        </ol>
+
+        {previousPagePath && (
+          <>
+            <Link to={'/blog' + previousPagePath}>Previous page</Link>
+            <br />
+          </>
+        )}
+        {nextPagePath && <Link to={'/blog' + nextPagePath}>Next page</Link>}
+      </section>
     </Layout>
   )
 }
