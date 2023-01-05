@@ -17,6 +17,7 @@ import "./src/css/soames/soames-theme.css";
 import "./src/css/soames/soames-gallery.css";
 import "./src/css/soames/soames-parallax.css";
 import "./src/css/soames/soames.css";
+import "./src/css/soames/soames-gatsby.css";
 
 // soames - custom JS
 import "./src/css/soames/soames-nav-dropdown.js";

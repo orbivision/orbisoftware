@@ -23,23 +23,25 @@ const FooterMenu = () => {
   )
 
   return (
-    <p className="soames-text">
+    <div className="soames-footer-content">
+      <ul>
       {allWpMenuItem.nodes.map(item => (
         item.uri.includes('http') ? (
-          <>
+          <li key={item.id}>
             <a href={item.uri} target="_blank" rel="noreferrer">
               {item.label}
             </a><br/>
-          </>
+          </li>
         ) : (
-          <>
+          <li key={item.id}>
             <Link to={item.uri}>
               {item.label}
             </Link><br/>
-          </>
+          </li>
         )
       ))}
-    </p>
+      </ul>
+    </div>
   )
 }
   

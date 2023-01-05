@@ -25,8 +25,8 @@ const Page = ({ data: { page }}) => (
     />
     {!!page.content && (
       <section
-        id="gatsby-containter"
-        style={{ backgroundColor: '#fff', backgroundImage: 'none', padding: '20px'}}>
+        id="soames-gatsby-content-container"
+        className="soames-gatsby-content">
         {parse(page.content)}  
       </section>
     )}

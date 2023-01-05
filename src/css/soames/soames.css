@@ -752,7 +752,12 @@ blockquote {
   border-radius: 100px !important;
 }
 
-/* Headers*/
+.soames-footer-content ul {
+  list-style: none;
+  padding: 0px;
+}
+
+/* Headers */
 .header13 .form-inline input[type="email"],
 .header14 .form-inline input[type="email"] {
   border-radius: 100px;

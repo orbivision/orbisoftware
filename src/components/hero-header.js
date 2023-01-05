@@ -11,7 +11,7 @@ const HeroHeader = ({
   if (!backgroundImage) {
     backgroundImage = 'https://picsum.photos/1080/720';
   } else {
-    // check filename for specified opacity value
+    // check background image title for specified opacity value
     if (backgroundImageTitle && backgroundImageTitle.includes('_03o_')) {
       overlayOpacity = 0.3;
     }
