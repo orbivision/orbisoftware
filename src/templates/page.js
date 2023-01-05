@@ -6,6 +6,8 @@ import parse from "html-react-parser"
 import Seo from "../components/seo";
 import HeroHeader from "../components/hero-header";
 
+import { Shortcodes } from "../utils/wordpress/shortcodes.utils";
+
 // We're using Gutenberg so we need the block styles
 // these are copied into this project due to a conflict in the postCSS
 // version used by the Gatsby and @wordpress packages that causes build
@@ -27,7 +29,9 @@ const Page = ({ data: { page }}) => (
       <section
         id="soames-gatsby-content-container"
         className="soames-gatsby-content">
-        {parse(page.content)}  
+        <Shortcodes>
+          {page.content}  
+        </Shortcodes>
       </section>
     )}
   </Layout>
