@@ -2,25 +2,27 @@ import React from "react";
 import { graphql, useStaticQuery, Link } from "gatsby";
 
 const HeaderMenu = () => {
-  const { allWpMenuItem } = useStaticQuery(
+  const { wpMenu } = useStaticQuery(
     graphql`
       query WpHeaderMenu {
-        allWpMenuItem(
-          filter: {label: {eq: "gatsby-header-menu"}, parentDatabaseId: {eq: 0}}
-          ,sort: {order: ASC}) {
-          nodes {
-            id
-            label
-            parentDatabaseId
-            path
-            uri
-            order
-            childItems {
-              nodes {
-                id
-                label
-                uri
-                order
+        wpMenu(name: {eq: "soames-header-menu"}) {
+          id
+          name
+          menuItems {
+            nodes {
+              id
+              label
+              parentDatabaseId
+              path
+              uri
+              order
+              childItems {
+                nodes {
+                  id
+                  label
+                  uri
+                  order
+                }
               }
             }
           }
@@ -33,7 +35,7 @@ const HeaderMenu = () => {
     
     <div className="collapse navbar-collapse" id="navbarSupportedContent">
       <ul className="navbar-nav nav-dropdown nav-right" data-app-modern-menu="true">
-        {allWpMenuItem.nodes.map(item => (
+        {wpMenu.menuItems.nodes.map(item => (
           item.path !== "/home/" && (
             item.childItems.nodes.length === 0 ? (
               <li key={item.id} className="nav-item">
