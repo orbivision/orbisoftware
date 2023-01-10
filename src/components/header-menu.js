@@ -6,13 +6,12 @@ const HeaderMenu = () => {
     graphql`
       query WpHeaderMenu {
         allWpMenuItem(
-          filter: {locations: {eq: GATSBY_HEADER_MENU}, parentDatabaseId: {eq: 0}}
+          filter: {label: {eq: "gatsby-header-menu"}, parentDatabaseId: {eq: 0}}
           ,sort: {order: ASC}) {
           nodes {
             id
             label
             parentDatabaseId
-            locations
             path
             uri
             order

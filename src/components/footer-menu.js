@@ -6,13 +6,12 @@ const FooterMenu = () => {
     graphql`
       query WpFooterMenu {
         allWpMenuItem(
-          filter: {locations: {eq: GATSBY_FOOTER_MENU}, parentDatabaseId: {eq: 0}}
+          filter: {label: {eq: "gatsby-footer-menu"}, parentDatabaseId: {eq: 0}}
           ,sort: {order: ASC}) {
           nodes {
             id
             label
             parentDatabaseId
-            locations
             path
             uri
             order

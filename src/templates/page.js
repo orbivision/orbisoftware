@@ -6,7 +6,7 @@ import parse from "html-react-parser"
 import Seo from "../components/seo";
 import HeroHeader from "../components/hero-header";
 
-import { Shortcodes } from "../utils/wordpress/shortcodes.utils";
+import { Shortcodes } from "../utils/@wordpress/shortcodes.utils";
 
 // We're using Gutenberg so we need the block styles
 // these are copied into this project due to a conflict in the postCSS
