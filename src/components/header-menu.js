@@ -36,7 +36,7 @@ const HeaderMenu = () => {
     <div className="collapse navbar-collapse" id="navbarSupportedContent">
       <ul className="navbar-nav nav-dropdown nav-right" data-app-modern-menu="true">
         {wpMenu.menuItems.nodes.map(item => (
-          item.path !== "/home/" && (
+          (item.path !== "/home/" && item.parentDatabaseId === 0) && (
             item.childItems.nodes.length === 0 ? (
               <li key={item.id} className="nav-item">
                 {item.uri.includes('http') ? (
