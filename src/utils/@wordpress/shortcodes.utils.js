@@ -4,6 +4,7 @@ import parse from "html-react-parser";
 import RemoveContentAreaPadding from "../../components/@wordpress/shortcodes/remove-content-area-padding";
 import SoamesTitle from "../../components/@wordpress/shortcodes/soames-title";
 import SoamesTitleBar from "../../components/@wordpress/shortcodes/soames-title-bar";
+import SoamesTitleBarLg from "../../components/@wordpress/shortcodes/soames-title-bar-lg";
 
 // Util function to handle the shortcode find/replace.
 const handleShortcodes = (node) => {
@@ -24,15 +25,26 @@ const handleShortcodes = (node) => {
     // The following shortcodes support attributes and/or
     // content, so they must be parsed using a regex
     if (shortcode) {
-      const soamesTitleMatch = shortcode.match(/\[soames-title([^\]]*)\]([^\]]*)\[\/soames-title\]/);
-      if (soamesTitleMatch && soamesTitleMatch[2]) {
-        const title = soamesTitleMatch[2];
+      const titleRegex = /\[soames-title([^\]]*)\]([^\]]*)\[\/soames-title\]/;
+      const titleMatch = shortcode.match(titleRegex);
+      if (titleMatch && titleMatch[2]) {
+        const title = titleMatch[2];
         return <SoamesTitle title={title} />;
       }
-      const soamesTitleBarMatch = shortcode.match(/\[soames-title-bar([^\]]*)\]([^\]]*)\[\/soames-title-bar\]/);
-      if (soamesTitleBarMatch && soamesTitleBarMatch[2]) {
-        const title = soamesTitleBarMatch[2];
+      const titleBarRegex = /\[soames-title-bar([^\]]*)\]([^\]]*)\[\/soames-title-bar\]/;
+      const titleBarMatch = shortcode.match(titleBarRegex);
+      if (titleBarMatch && titleBarMatch[2]) {
+        const title = titleBarMatch[2];
         return <SoamesTitleBar title={title} />;
+      }
+      const titleBarLgRegex = /\[soames-title-bar-lg([^\]]*)\]([^\]]*)\[\/soames-title-bar-lg\]/;
+      const titleBarLgMatch = shortcode.match(titleBarLgRegex);
+      if (titleBarLgMatch && titleBarLgMatch[1] && titleBarLgMatch[2]) {
+        const title = titleBarLgMatch[2];
+        const titleBarLgSubtitleRegex = /(\w+)=["']?((?:.(?!["']?\s+(?:\S+)=|\s*\/?[>"']))+.)["']?/gm;
+        const [titleBarLgSubtitleMatch] = titleBarLgMatch[1].matchAll(titleBarLgSubtitleRegex);
+        const subtitle = titleBarLgSubtitleMatch[2].trim().slice(1, -1);
+        return <SoamesTitleBarLg title={title} subtitle={subtitle} />;
       }
     }
     
