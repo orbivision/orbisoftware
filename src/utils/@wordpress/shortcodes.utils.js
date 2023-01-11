@@ -5,6 +5,7 @@ import RemoveContentAreaPadding from "../../components/@wordpress/shortcodes/rem
 import SoamesTitle from "../../components/@wordpress/shortcodes/soames-title";
 import SoamesTitleBar from "../../components/@wordpress/shortcodes/soames-title-bar";
 import SoamesTitleBarLg from "../../components/@wordpress/shortcodes/soames-title-bar-lg";
+import SoamesTextBlock from "../../components/@wordpress/shortcodes/soames-text-block";
 
 // Util function to handle the shortcode find/replace.
 const handleShortcodes = (node) => {
@@ -45,6 +46,12 @@ const handleShortcodes = (node) => {
         const [titleBarLgSubtitleMatch] = titleBarLgMatch[1].matchAll(titleBarLgSubtitleRegex);
         const subtitle = titleBarLgSubtitleMatch[2].trim().slice(1, -1);
         return <SoamesTitleBarLg title={title} subtitle={subtitle} />;
+      }
+      const textBlockRegex = /\[soames-text-block([^\]]*)\]([^\]]*)\[\/soames-text-block\]/;
+      const textBlockMatch = shortcode.match(textBlockRegex);
+      if (textBlockMatch && textBlockMatch[2]) {
+        const text = textBlockMatch[2];
+        return <SoamesTextBlock text={text} />;
       }
     }
     
