@@ -3,7 +3,7 @@ import React from "react";
 const SoamesTitleBar = ({ title }) => {
 
   return(
-    <section className="soames-section content4 soames-title-bar" id="content4-fq">
+    <section className="soames-section soames-title-bar">
       <div className="container">
         <div className="media-container-row">
           <div className="title col-12 col-md-8">

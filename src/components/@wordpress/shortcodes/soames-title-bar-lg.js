@@ -5,7 +5,7 @@ const SoamesTitleBarLg = ({ title, subtitle }) => {
   const backgroundImage = 'https://picsum.photos/1080/720';
 
   const css = `
-    .soames-background-chm5::after {
+    .soames-background-title-bar-lg::after {
       background: url(${backgroundImage});
       background-position: 50% 50%;
       background-size: cover;
@@ -24,7 +24,7 @@ const SoamesTitleBarLg = ({ title, subtitle }) => {
   return(
     <>
       <style>{css}</style>
-      <section className="soames-header-sm soames-parallax soames-background-chm5">
+      <section className="soames-header-sm soames-parallax soames-background-title-bar-lg">
         <div className="soames-overlay" style={{ opacity: 0.5, backgroundColor: 'rgb(46, 46, 46)' }}></div>
         <div className="container">
           <div className="row justify-content-md-center">

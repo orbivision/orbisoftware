@@ -6,6 +6,7 @@ import SoamesTitle from "../../components/@wordpress/shortcodes/soames-title";
 import SoamesTitleBar from "../../components/@wordpress/shortcodes/soames-title-bar";
 import SoamesTitleBarLg from "../../components/@wordpress/shortcodes/soames-title-bar-lg";
 import SoamesTextBlock from "../../components/@wordpress/shortcodes/soames-text-block";
+import SoamesIconList from "../../components/@wordpress/shortcodes/soames-icon-list";
 
 // Util function to handle the shortcode find/replace.
 const handleShortcodes = (node) => {
@@ -27,16 +28,14 @@ const handleShortcodes = (node) => {
     // content, so they must be parsed using a regex
     if (shortcode) {
       const titleRegex = /\[soames-title([^\]]*)\]([^\]]*)\[\/soames-title\]/;
-      const titleMatch = shortcode.match(titleRegex);
-      if (titleMatch && titleMatch[2]) {
-        const title = titleMatch[2];
-        return <SoamesTitle title={title} />;
+      const titleContent = getContent(shortcode.match(titleRegex));
+      if (titleContent) {
+        return <SoamesTitle title={titleContent} />;
       }
       const titleBarRegex = /\[soames-title-bar([^\]]*)\]([^\]]*)\[\/soames-title-bar\]/;
-      const titleBarMatch = shortcode.match(titleBarRegex);
-      if (titleBarMatch && titleBarMatch[2]) {
-        const title = titleBarMatch[2];
-        return <SoamesTitleBar title={title} />;
+      const titleBarContent = getContent(shortcode.match(titleBarRegex));
+      if (titleBarContent) {
+        return <SoamesTitleBar title={titleBarContent} />;
       }
       const titleBarLgRegex = /\[soames-title-bar-lg([^\]]*)\]([^\]]*)\[\/soames-title-bar-lg\]/;
       const titleBarLgMatch = shortcode.match(titleBarLgRegex);
@@ -48,10 +47,14 @@ const handleShortcodes = (node) => {
         return <SoamesTitleBarLg title={title} subtitle={subtitle} />;
       }
       const textBlockRegex = /\[soames-text-block([^\]]*)\]([^\]]*)\[\/soames-text-block\]/;
-      const textBlockMatch = shortcode.match(textBlockRegex);
-      if (textBlockMatch && textBlockMatch[2]) {
-        const text = textBlockMatch[2];
-        return <SoamesTextBlock text={text} />;
+      const textBlockContent = getContent(shortcode.match(textBlockRegex));
+      if (textBlockContent) {
+        return <SoamesTextBlock text={textBlockContent} />;
+      }
+      const iconListRegex = /\[soames-icon-list([^\]]*)\]([^\]]*)/;
+      const attributes = getAttributes(shortcode.match(iconListRegex));
+      if (attributes) {
+        return <SoamesIconList attributes={attributes} />;
       }
     }
     
@@ -60,6 +63,30 @@ const handleShortcodes = (node) => {
   // If nothing then return original node
   return node;
 };
+
+const getContent = (regexMatch) => {
+  if (regexMatch && regexMatch[2]) {
+    const shortcodeContent = regexMatch[2];
+    return shortcodeContent;
+  }
+  return null;
+}
+
+const getAttributes = (regexMatch) => {
+  const attributes = {};
+  if (regexMatch && regexMatch[1]) {
+    const regex = /(\w+)=["']?((?:.(?!["']?\s+(?:\S+)=|\s*\/?[>"']))+.)["']?/g;
+    regexMatch[1].match(regex).forEach(match => {
+      if (match) {
+        const label = match.split('=')[0];
+        const valuesArray = match.replace(/[″”]+/g, '').split('=')[1].split(',');
+        attributes[label] = valuesArray;
+      }
+    });
+    return attributes;
+  }
+  return null;
+}
 
 export const Shortcodes = ({ children }) => {
   const reactElements = parse(children || "", {
