@@ -26,7 +26,7 @@ const SoamesIconList = ({ attributes }) => {
       <div className="d-flex flex-wrap align-items-center justify-content-center">
         {icons.map(icon => (   
           <a key={icon.id} className={`d-flex flex-column align-items-center text-decoration-none p-2 ` + icon.css} href="https://www.typescriptlang.org/" target="_blank" rel="noreferrer">
-            <img className="d-block mb-2" src={icon.imageUrl} alt="" width="116" height="116" loading="lazy" />
+            <img className="d-block mb-2" src={icon.imageUrl} alt="" height="116" loading="lazy" />
             <span className="text-muted">{icon.label}</span>
           </a>
         ))}

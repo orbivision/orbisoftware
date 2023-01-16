@@ -24,7 +24,7 @@ const SoamesTitleBarLg = ({ title, subtitle }) => {
   return(
     <>
       <style>{css}</style>
-      <section className="soames-header-sm soames-parallax soames-background-title-bar-lg">
+      <section className="soames-header-sm soames-parallax soames-background-title-bar-lg mt-5 mb-3">
         <div className="soames-overlay" style={{ opacity: 0.5, backgroundColor: 'rgb(46, 46, 46)' }}></div>
         <div className="container">
           <div className="row justify-content-md-center">

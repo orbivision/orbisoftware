@@ -6,7 +6,7 @@ const Footer = ({ title }) => {
 
   return (
 
-    <section className="soames-footer" id="footer1">
+    <section className="soames-footer mt-5">
       <div className="container">
         <div className="media-container-row content text-white">
           <div className="col-12 col-md-2">
