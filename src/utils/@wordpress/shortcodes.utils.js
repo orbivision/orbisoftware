@@ -7,6 +7,7 @@ import SoamesTitleBar from "../../components/@wordpress/shortcodes/soames-title-
 import SoamesTitleBarLg from "../../components/@wordpress/shortcodes/soames-title-bar-lg";
 import SoamesTextBlock from "../../components/@wordpress/shortcodes/soames-text-block";
 import SoamesIconList from "../../components/@wordpress/shortcodes/soames-icon-list";
+import SoamesFeature from "../../components/@wordpress/shortcodes/soames-feature";
 
 // Util function to handle the shortcode find/replace.
 const handleShortcodes = (node) => {
@@ -38,13 +39,10 @@ const handleShortcodes = (node) => {
         return <SoamesTitleBar title={titleBarContent} />;
       }
       const titleBarLgRegex = /\[soames-title-bar-lg([^\]]*)\]([^\]]*)\[\/soames-title-bar-lg\]/;
-      const titleBarLgMatch = shortcode.match(titleBarLgRegex);
-      if (titleBarLgMatch && titleBarLgMatch[1] && titleBarLgMatch[2]) {
-        const title = titleBarLgMatch[2];
-        const titleBarLgSubtitleRegex = /(\w+)=["']?((?:.(?!["']?\s+(?:\S+)=|\s*\/?[>"']))+.)["']?/gm;
-        const [titleBarLgSubtitleMatch] = titleBarLgMatch[1].matchAll(titleBarLgSubtitleRegex);
-        const subtitle = titleBarLgSubtitleMatch[2].trim().slice(1, -1);
-        return <SoamesTitleBarLg title={title} subtitle={subtitle} />;
+      const titleBarLgContent = getContent(shortcode.match(titleBarLgRegex));
+      const titleBarLgAttributes = getAttributes(shortcode.match(titleBarLgRegex));
+      if (titleBarLgContent || titleBarLgAttributes) {
+        return <SoamesTitleBarLg title={titleBarLgContent} attributes={titleBarLgAttributes} />;
       }
       const textBlockRegex = /\[soames-text-block([^\]]*)\]([^\]]*)\[\/soames-text-block\]/;
       const textBlockContent = getContent(shortcode.match(textBlockRegex));
@@ -52,9 +50,15 @@ const handleShortcodes = (node) => {
         return <SoamesTextBlock text={textBlockContent} />;
       }
       const iconListRegex = /\[soames-icon-list([^\]]*)\]([^\]]*)/;
-      const attributes = getAttributes(shortcode.match(iconListRegex));
-      if (attributes) {
-        return <SoamesIconList attributes={attributes} />;
+      const iconListAttributes = getAttributes(shortcode.match(iconListRegex));
+      if (iconListAttributes) {
+        return <SoamesIconList attributes={iconListAttributes} />;
+      }
+      const featureRegex = /\[soames-feature([^\]]*)\]([^\]]*)\[\/soames-feature\]/;
+      const featureContent = getContent(shortcode.match(featureRegex));
+      const featureAttributes = getAttributes(shortcode.match(featureRegex));
+      if (featureContent && featureAttributes) {
+        return <SoamesFeature content={featureContent} attributes={featureAttributes} />;
       }
     }
     
@@ -83,6 +87,7 @@ const getAttributes = (regexMatch) => {
         attributes[label] = valuesArray;
       }
     });
+    console.log(attributes);
     return attributes;
   }
   return null;
