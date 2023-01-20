@@ -8,6 +8,7 @@ import SoamesTitleBarLg from "../../components/@wordpress/shortcodes/soames-titl
 import SoamesTextBlock from "../../components/@wordpress/shortcodes/soames-text-block";
 import SoamesIconList from "../../components/@wordpress/shortcodes/soames-icon-list";
 import SoamesFeature from "../../components/@wordpress/shortcodes/soames-feature";
+import SoamesGalleryMenu from "../../components/@wordpress/shortcodes/soames-gallery-menu";
 
 // Util function to handle the shortcode find/replace.
 const handleShortcodes = (node) => {
@@ -59,6 +60,11 @@ const handleShortcodes = (node) => {
       const featureAttributes = getAttributes(shortcode.match(featureRegex));
       if (featureContent && featureAttributes) {
         return <SoamesFeature content={featureContent} attributes={featureAttributes} />;
+      }
+      const galleryMenuRegex = /\[soames-gallery-menu([^\]]*)\]([^\]]*)/;
+      const galleryMenuAttributes = getAttributes(shortcode.match(galleryMenuRegex));
+      if (galleryMenuAttributes) {
+        return <SoamesGalleryMenu attributes={galleryMenuAttributes} />;
       }
     }
     

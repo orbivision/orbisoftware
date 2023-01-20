@@ -1,25 +1,16 @@
 import React from "react";
 
 const SoamesIconList = ({ attributes }) => {
-
+  const { images, links, labels, css } = attributes;
   const icons = [];
-  if (!attributes.links) {
-    attributes.links = [];
-  }
-  if (!attributes.labels) {
-    attributes.labels = [];
-  }
-  if (!attributes.css) {
-    attributes.css = [];
-  }
-  for (const i in attributes.images) {
-    const imageUrl = attributes.images[i].replace(/['""]+/g, '"');
+  for (const i in images) {
+    const imageUrl = images[i].replace(/['""]+/g, '"');
     const icon = {
       id: 'icon_' + i,
       imageUrl: imageUrl,
-      label: attributes.labels[i] ? attributes.labels[i] : null,
-      link: attributes.links[i] ? attributes.links[i] : null,
-      css: attributes.css[i] ? attributes.css[i] : null,
+      label: labels && labels[i] ? labels[i] : null,
+      link: links && links[i] ? links[i] : null,
+      css: css && css[i] ? css[i] : null,
     }
     icons.push(icon);
   }

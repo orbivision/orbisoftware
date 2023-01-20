@@ -1,17 +1,13 @@
 import React from "react";
 
 const SoamesTitleBarLg = ({ title, attributes }) => {
-
-  if (!attributes.subtitle) {
-    attributes.subtitle = null;
-  }
-  if (!attributes.background) {
-    attributes.background = 'https://picsum.photos/1080/720';
-  }
+  const { subtitle, background } = attributes;
+  
+  const defaultBackground = 'https://picsum.photos/1080/720';
 
   const css = `
     .soames-background-title-bar-lg::after {
-      background: url(${attributes.background});
+      background: url(${background ? background: defaultBackground});
       background-position: 50% 50%;
       background-size: cover;
       background-repeat: no-repeat;
@@ -37,9 +33,9 @@ const SoamesTitleBarLg = ({ title, attributes }) => {
               <h1 className="soames-section-title align-center soames-bold pb-3 mbr-fonts-style display-1">
                 {title}
               </h1>
-              {attributes.subtitle &&
+              {subtitle &&
                 <h3 className="soames-section-subtitle align-center soames-light soames-white mbr-fonts-style display-5">
-                  {attributes.subtitle}
+                  {subtitle}
                 </h3>
               }
             </div>

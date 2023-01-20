@@ -1,16 +1,7 @@
 import React from "react";
 
 const SoamesFeature = ({ content, attributes }) => {
-
-  if (!attributes.image) {
-    attributes.image = '';
-  }
-  if (!attributes.title) {
-    attributes.title = '';
-  }
-  if (!attributes.css) {
-    attributes.css = [];
-  }
+  const { image, title } = attributes;
 
   return(
     <section className="soames-features">
@@ -18,9 +9,9 @@ const SoamesFeature = ({ content, attributes }) => {
         <div className="col-md-12">
           <div className="media-container-row">
             <div className=" align-left aside-content">
-              {attributes.title &&
+              {title &&
                 <h2 className="mbr-title pt-2 mbr-fonts-style display-2">
-                  <div>Resume</div>
+                  <div>{title}</div>
                 </h2>
               }
               <div className="soames-section-text"></div>
@@ -39,9 +30,9 @@ const SoamesFeature = ({ content, attributes }) => {
                 </div>
               </div>
             </div>
-            {attributes.image &&
+            {image &&
               <div className="soames-figure" style={{ width: '50%' }}>
-                <img src={attributes.image} alt="John Eric Fritz" title="John Eric Fritz" />
+                <img src={image} alt={title} title={title} />
               </div>
             }
           </div>
