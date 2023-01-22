@@ -1,7 +1,7 @@
 import React from "react";
 
 const SoamesFeature = ({ content, attributes }) => {
-  const { image, title } = attributes;
+  const { image, title, css } = attributes;
 
   return(
     <section className="soames-features">
@@ -14,9 +14,8 @@ const SoamesFeature = ({ content, attributes }) => {
                   <div>{title}</div>
                 </h2>
               }
-              <div className="soames-section-text"></div>
               <div className="block-content">
-                <div className="card p-3 pr-3">
+                <div className={`card ` + css}>
                   <div className="media">
                     <div className="media-body"></div>
                   </div>                
