@@ -9,6 +9,7 @@ import SoamesTextBlock from "../../components/@wordpress/shortcodes/soames-text-
 import SoamesIconList from "../../components/@wordpress/shortcodes/soames-icon-list";
 import SoamesFeature from "../../components/@wordpress/shortcodes/soames-feature";
 import SoamesGalleryMenu from "../../components/@wordpress/shortcodes/soames-gallery-menu";
+import SoamesVideo from "../../components/@wordpress/shortcodes/soames-video";
 
 // Util function to handle the shortcode find/replace.
 const handleShortcodes = (node) => {
@@ -65,6 +66,11 @@ const handleShortcodes = (node) => {
       const galleryMenuAttributes = getAttributes(shortcode.match(galleryMenuRegex));
       if (galleryMenuAttributes) {
         return <SoamesGalleryMenu attributes={galleryMenuAttributes} />;
+      }
+      const videoRegex = /\[soames-video([^\]]*)\]([^\]]*)/;
+      const videoAttributes = getAttributes(shortcode.match(videoRegex));
+      if (videoAttributes) {
+        return <SoamesVideo attributes={videoAttributes} />;
       }
     }
     
