@@ -3,6 +3,8 @@ import React from "react";
 const SoamesFeature = ({ content, attributes }) => {
   const { image, title, css } = attributes;
 
+  const paragraphs = content.split('__SOAMES_P__');
+
   return(
     <section className="soames-features">
       <div className="container">   
@@ -20,11 +22,11 @@ const SoamesFeature = ({ content, attributes }) => {
                     <div className="media-body"></div>
                   </div>                
                   <div className="card-box">
-                    {content &&
+                    {paragraphs.map(paragraph => (
                       <p className="block-text mbr-fonts-style display-7">
-                        {content}
+                        {paragraph}
                       </p>
-                    }
+                    ))}
                   </div>
                 </div>
               </div>
