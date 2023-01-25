@@ -23,7 +23,7 @@ const SoamesFeature = ({ content, attributes }) => {
                   </div>                
                   <div className="card-box">
                     {paragraphs.map(paragraph => (
-                      <p className="block-text mbr-fonts-style display-7">
+                      <p key={paragraph.substring(1,10)} className="block-text mbr-fonts-style display-7">
                         {paragraph}
                       </p>
                     ))}

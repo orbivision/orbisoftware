@@ -10,6 +10,7 @@ import SoamesIconList from "../../components/@wordpress/shortcodes/soames-icon-l
 import SoamesFeature from "../../components/@wordpress/shortcodes/soames-feature";
 import SoamesGalleryMenu from "../../components/@wordpress/shortcodes/soames-gallery-menu";
 import SoamesVideo from "../../components/@wordpress/shortcodes/soames-video";
+import SoamesTextList from "../../components/@wordpress/shortcodes/soames-text-list";
 
 // Util function to handle the shortcode find/replace.
 const handleShortcodes = (node) => {
@@ -49,7 +50,12 @@ const handleShortcodes = (node) => {
       const textBlockRegex = /\[soames-text-block([^\]]*)\]([^\]]*)\[\/soames-text-block\]/;
       const textBlockContent = getContent(shortcode.match(textBlockRegex));
       if (textBlockContent) {
-        return <SoamesTextBlock text={textBlockContent} />;
+        return <SoamesTextBlock content={textBlockContent} />;
+      }
+      const textListRegex = /\[soames-text-list([^\]]*)\]([^\]]*)\[\/soames-text-list\]/;
+      const textListContent = getContent(shortcode.match(textListRegex));
+      if (textListContent) {
+        return <SoamesTextList content={textListContent} />;
       }
       const iconListRegex = /\[soames-icon-list([^\]]*)\]([^\]]*)/;
       const iconListAttributes = getAttributes(shortcode.match(iconListRegex));
@@ -99,7 +105,6 @@ const getAttributes = (regexMatch) => {
         attributes[label] = valuesArray;
       }
     });
-    console.log(attributes);
     return attributes;
   }
   return null;

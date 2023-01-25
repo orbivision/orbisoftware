@@ -61,7 +61,7 @@ const HeaderMenu = () => {
                 <div className="dropdown-menu">
                   <ul className="navbar-nav nav-dropdown nav-right">
                   {item.childItems.nodes.map(childItem => (
-                    <li key={item.id}>
+                    <li key={childItem.id}>
                       {childItem.uri.includes('http') ? (
                         <a
                           className="text-white dropdown-item display-4"
