@@ -10,9 +10,11 @@ const SoamesTextList = ({ content }) => {
         <div class="media-container-row">
           <div class="soames-text
             counter-container
-            col-12 col-md-10
+            col-12
+            col-md-10
             mbr-fonts-style
-            pt-3 display-7">
+            pt-0
+            display-7">
             <ul>
               {lineItems.map(lineItem => (
                 <li key={lineItem.substring(1,25)}>
