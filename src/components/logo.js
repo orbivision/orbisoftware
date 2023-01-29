@@ -16,8 +16,10 @@ const Logo = ({ title }) => {
       <div className="navbar-brand">
         <span className="navbar-caption-wrap">
           <a className="navbar-caption text-white display-5" href="/">
-            {wpMediaItem && (
+            {wpMediaItem ? (
               <img width="108" alt={wpMediaItem.title} src={wpMediaItem.guid} />
+            ) : (
+              <img width="108" alt="Orbi Software" src="https://orbivision.net/wp-content/uploads/2023/01/punch_card.png" />
             )}
             &nbsp;&nbsp;{title}
           </a>
