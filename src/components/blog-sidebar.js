@@ -30,8 +30,8 @@ const BlogSidebar = ({ postId }) => {
       <div className="container">
         {posts.nodes.map((post, key) => (
           post.id !== postId && (
-          <div className="media-container-row">
-            <div key={key} className="card p-3 col-12">
+          <div key={key} className="media-container-row">
+            <div className="card p-3 col-12">
               <div className="card-wrapper">
                 <div className="card-box">
                   <h4 className="card-title mbr-fonts-style display-5">
