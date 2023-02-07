@@ -7,11 +7,11 @@ const Header = ({ title, isHomePage }) => {
 
   return (
     
-    <section className="menu soames-menu" id="menu1">
+    <section className="menu soames-menu">
       <nav
         className="navbar navbar-expand beta-menu navbar-dropdown align-items-center navbar-fixed-top navbar-toggleable-sm">
-        <button className="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
-          data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+        <button className="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
           aria-label="Toggle navigation">
           <div className="hamburger">
             <span></span>
