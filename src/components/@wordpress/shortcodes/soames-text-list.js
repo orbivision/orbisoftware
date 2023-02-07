@@ -16,8 +16,8 @@ const SoamesTextList = ({ content }) => {
             pt-0
             display-7">
             <ul>
-              {lineItems.map(lineItem => (
-                <li key={lineItem.substring(1,25)}>
+              {lineItems.map((lineItem, key) => (
+                <li key={key}>
                   {lineItem}
                 </li>
               ))}

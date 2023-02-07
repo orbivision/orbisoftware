@@ -1,7 +1,7 @@
 import React from "react";
 import Layout from "../components/layout";
 import { graphql } from "gatsby";
-import parse from "html-react-parser"
+import parse from "html-react-parser";
 
 import Seo from "../components/seo";
 import HeroHeader from "../components/hero-header";

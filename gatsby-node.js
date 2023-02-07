@@ -13,18 +13,10 @@ const chunk = require(`lodash/chunk`)
  */
 exports.createPages = async gatsbyUtilities => {
   
-  // Always redirect root to "home" page from WordPress
-  /*gatsbyUtilities.actions.createRedirect({
-    fromPath: '/',
-    toPath: '/home',
-    redirectInBrowser: true,
-    isPermanent: true
-  });*/
-
   // Query our posts from the GraphQL server
   const posts = await getPosts(gatsbyUtilities)
 
-  //Query pages from GraphQL
+  // Query pages from GraphQL
   const pages = await getPages(gatsbyUtilities);
 
   // If there are no posts or pages in WordPress, don't do anything
@@ -32,7 +24,7 @@ exports.createPages = async gatsbyUtilities => {
     return
   }
 
-  // If there are posts, create pages for them
+  // If there are posts, create Gatsby pages for them
   await createIndividualBlogPostPages({ posts, gatsbyUtilities })
 
   // And a paginated archive
@@ -75,7 +67,7 @@ const createIndividualBlogPostPages = async ({ posts, gatsbyUtilities }) =>
   )
 
 /**
- * This function creates all the individual blog pages in this site
+ * This function creates the blog archive with links to all blog posts
  */
 async function createBlogPostArchive({ posts, gatsbyUtilities }) {
   const graphqlResult = await gatsbyUtilities.graphql(/* GraphQL */ `
@@ -186,7 +178,7 @@ const createIndividualPages = async ({ pages, gatsbyUtilities }) =>
       gatsbyUtilities.actions.createPage({
         // Use the WordPress uri as the Gatsby page path
         // This is a good idea so that internal links and menus work 👍
-        path: page.uri === '/home/' ? `/` : page.uri,
+        path: page.uri ? page.uri : '/soames-blog-archive/',
 
         // use the blog post template as the page component
         component: path.resolve(`./src/templates/page.js`),

@@ -15,7 +15,10 @@ import Bio from "../components/bio"
 import Layout from "../components/layout"
 import Seo from "../components/seo"
 
-const BlogPostTemplate = ({ data: { previous, next, post } }) => {
+import HeroHeader from "../components/hero-header";
+import BlogSidebar from "../components/blog-sidebar"
+
+const BlogPostTemplate = ({ data: { previous, next, post, page } }) => {
   const featuredImage = {
     data: post.featuredImage?.node?.localFile?.childImageSharp?.gatsbyImageData,
     alt: post.featuredImage?.node?.alt || ``,
@@ -24,65 +27,96 @@ const BlogPostTemplate = ({ data: { previous, next, post } }) => {
   return (
     <Layout>
       <Seo title={post.title} description={post.excerpt} />
+      <HeroHeader
+          title={page.title ? parse(page.title) : "Blog"}
+          subhead={page.excerpt ? parse(page.excerpt) : ""}
+          backgroundImage={page.featuredImage ? page.featuredImage.node.guid : null}
+          backgroundImageTitle={page.featuredImage ? page.featuredImage.node.title : null}
+        />
+      <section>
+        <div className="media-container-row">
+          <div className="col-12 col-lg-8">
+          
+            <section
+              id="soames-gatsby-content-container"
+              className="soames-gatsby-content">
+              
+                <article
+                  className="blog-post"
+                  itemScope
+                  itemType="http://schema.org/Article"
+                >
+                  <header>
+                    <h1 itemProp="headline">{parse(post.title)}</h1>
+                    <p>{post.date}</p>
+                  </header>
 
-      <article
-        className="blog-post"
-        itemScope
-        itemType="http://schema.org/Article"
-      >
-        <header>
-          <h1 itemProp="headline">{parse(post.title)}</h1>
+                  {!!post.content && (
+                    <section itemProp="articleBody">{parse(post.content)}</section>
+                  )}
 
-          <p>{post.date}</p>
+                  <hr />
 
-          {/* if we have a featured image for this post let's display it */}
-          {featuredImage?.data && (
-            <GatsbyImage
-              image={featuredImage.data}
-              alt={featuredImage.alt}
-              style={{ marginBottom: 50 }}
-            />
-          )}
-        </header>
+                  <footer>
+                    <Bio />
+                  </footer>
+                </article>
 
-        {!!post.content && (
-          <section itemProp="articleBody">{parse(post.content)}</section>
-        )}
+                <nav className="blog-post-nav">
+                  <ul
+                    style={{
+                      display: `flex`,
+                      flexWrap: `wrap`,
+                      justifyContent: `space-between`,
+                      listStyle: `none`,
+                      padding: 0,
+                    }}
+                  >
+                    <li>
+                      {previous && (
+                        <Link to={'/blog' + previous.uri} rel="prev">
+                          ← {parse(previous.title)}
+                        </Link>
+                      )}
+                    </li>
 
-        <hr />
+                    <li>
+                      {next && (
+                        <Link to={'/blog' + next.uri} rel="next">
+                          {parse(next.title)} →
+                        </Link>
+                      )}
+                    </li>
+                  </ul>
+                </nav>
 
-        <footer>
-          <Bio />
-        </footer>
-      </article>
+            </section>
 
-      <nav className="blog-post-nav">
-        <ul
-          style={{
-            display: `flex`,
-            flexWrap: `wrap`,
-            justifyContent: `space-between`,
-            listStyle: `none`,
-            padding: 0,
-          }}
-        >
-          <li>
-            {previous && (
-              <Link to={'/blog' + previous.uri} rel="prev">
-                ← {parse(previous.title)}
-              </Link>
-            )}
-          </li>
+          </div>
+          <div className="col-12 col-lg-4">
+            
+            <section
+              id="soames-gatsby-sidebar-container"
+              className="soames-gatsby-sidebar">
+              
+              {/* if we have a featured image for this post let's display it */}
+              {featuredImage?.data && (
+                <GatsbyImage
+                  image={featuredImage.data}
+                  alt={featuredImage.alt ? featuredImage.alt : 'Featured Image'}
+                  style={{ marginBottom: 50 }}
+                />
+              )}
 
-          <li>
-            {next && (
-              <Link to={'/blog' + next.uri} rel="next">
-                {parse(next.title)} →
-              </Link>
-            )}
-          </li>
-        </ul>
-      </nav>
+              <h1>Recent Posts</h1>
+
+              <BlogSidebar postId={post.id} />
+
+            </section>
+
+          </div>
+        </div>
+      </section>
     </Layout>
   )
 }
@@ -123,6 +157,15 @@ export const pageQuery = graphql`
     next: wpPost(id: { eq: $nextPostId }) {
       uri
       title
+    }
+    page: wpPage(isPostsPage: {eq: true}) {
+      title
+      excerpt
+      featuredImage {
+        node {
+          guid
+        }
+      }
     }
   }
 `

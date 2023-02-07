@@ -9,8 +9,8 @@ const SoamesTextBlock = ({ content }) => {
       <div className="container col-md-10">
         <div className="inner-container" style={{ width: "100%" }}>
           <div className="section-text align-center mbr-fonts-style display-7 pb-2">
-            {paragraphs.map(paragraph => (
-              <p key={paragraph.substring(1,10)} className="block-text mbr-fonts-style display-7">
+            {paragraphs.map((paragraph, key) => (
+              <p key={key} className="block-text mbr-fonts-style display-7">
                 {paragraph}
               </p>
             ))}          

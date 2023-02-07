@@ -2,6 +2,11 @@
 /* Soames styles for Gatsby WordPress content */
 
 .soames-gatsby-content {
-  padding: 60px 200px 40px 200px;
+  padding: 60px 100px 40px 100px;
   background-color: #fff;
+}
+
+.soames-gatsby-sidebar {
+  padding: 60px 40px 40px 40px;
+  background-color: #efefef;
 }
