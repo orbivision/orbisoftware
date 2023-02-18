@@ -10,15 +10,14 @@ const SoamesTitleBarLg = ({ title, attributes }) => {
       background: url(${background ? background: defaultBackground});
       background-position: 50% 50%;
       background-size: cover;
+      background-attachment: fixed;
       background-repeat: no-repeat;
-      position: fixed;
-      top: 0px;
       left: 0px;
-      height: 177.1875px;
+      height: 176px;
       overflow: hidden;
       pointer-events: none;
-      margin-top: -210px;
-      transform: translate3d(0px, 210px, 0px);
+      margin-top: 0px;
+      transform: translate3d(0px, 0px, 0px);
     }
   `
 
