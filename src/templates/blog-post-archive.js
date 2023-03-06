@@ -55,7 +55,7 @@ const BlogIndex = ({
               <div key={index} className="media-container-row">
                 {
                   grouped.map((post, j) =>
-                    <div key={j} className="card p-3 col-12 col-md-6 col-lg-4">
+                    <div key={j} className="card p-3 col-12 col-lg-4">
                       <div className="card-wrapper">
                         {/* post.featuredImage && (
                           <div className="card-img">
