@@ -21,7 +21,7 @@ const SoamesFeature = ({ content, attributes }) => {
                   <div className="media">
                     <div className="media-body"></div>
                   </div>                
-                  <div className="card-box pb-5">
+                  <div className="card-box">
                     {paragraphs.map((paragraph, key) => (
                       <p key={key} className="block-text mbr-fonts-style display-7">
                         {paragraph}
@@ -32,7 +32,7 @@ const SoamesFeature = ({ content, attributes }) => {
               </div>
             </div>
             {image &&
-              <div className="soames-figure pb-5" style={{ width: '50%' }}>
+              <div className="soames-figure" style={{ width: '50%' }}>
                 <img src={image} alt={title} title={title} />
               </div>
             }
