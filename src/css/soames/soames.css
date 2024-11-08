@@ -46,12 +46,16 @@ body {
 
 .display-7 {
   font-family: 'Rubik', sans-serif;
-  font-size: 1rem;
+  font-size: 1.2rem;
   font-display: swap;
 }
 
 .display-7>.soames-iconfont {
   font-size: 1.6rem;
+}
+
+.blog-post-content {
+  font-size: 1.2rem;
 }
 
 /* ---- Fluid typography for mobile devices ---- */

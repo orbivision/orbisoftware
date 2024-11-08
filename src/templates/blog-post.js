@@ -52,7 +52,7 @@ const BlogPostTemplate = ({ data: { previous, next, post, page } }) => {
                   </header>
 
                   {!!post.content && (
-                    <section itemProp="articleBody">{parse(post.content)}</section>
+                    <section itemProp="articleBody" className="blog-post-content">{parse(post.content)}</section>
                   )}
 
                   <hr />
