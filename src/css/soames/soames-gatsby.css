@@ -6,6 +6,11 @@
   background-color: #fff;
 }
 
+.soames-gatsby-blog-content {
+  padding: 60px 40px 40px 40px;
+  background-color: #fff;
+}
+
 .soames-gatsby-sidebar {
   padding: 60px 40px 40px 40px;
   background-color: #efefef;

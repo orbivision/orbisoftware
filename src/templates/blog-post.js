@@ -39,7 +39,7 @@ const BlogPostTemplate = ({ data: { previous, next, post, page } }) => {
           
             <section
               id="soames-gatsby-content-container"
-              className="soames-gatsby-content">
+              className="soames-gatsby-blog-content">
               
                 <article
                   className="blog-post"
